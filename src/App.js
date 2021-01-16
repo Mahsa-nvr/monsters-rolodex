@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       
-       <div><Monster /></div>
+       <div><Monster inc={1}/></div>
      
     </div>
   );

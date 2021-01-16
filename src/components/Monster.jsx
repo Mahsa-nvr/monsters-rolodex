@@ -7,11 +7,12 @@ import './../../src/App.css';
 class Monster extends React.Component {
 
     // eslint-disable-next-line no-useless-constructor
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             monsters: [],
-            searchField: ''
+            searchField: '',
+            mean:45
         }
     }
 
@@ -22,18 +23,28 @@ class Monster extends React.Component {
     }
 
     handleChange = e => {
-        this.setState({ searchField: e.target.value })
+        this.setState({ searchField: e.target.value , title: e.target.value })
+    }
+
+    handleClick = () => {
+        this.setState((prevState, prevProps) => {
+          return { mean: prevState.mean + prevProps.inc }
+        } , 
+        () => console.log(this.state.mean))
     }
 
 
     render() {
 
-        const { searchField , monsters } = this.state;
+        const { searchField , monsters , title } = this.state;
         const filterMonsters = monsters.filter(monster => 
            monster.name.toLowerCase().includes(searchField.toLowerCase()) 
             )
         return (
             <div className="container">
+                <h>{ title }</h>
+                <button onClick={this.handleClick}>click</button>
+                <h1>{ this.state.mean }</h1>
             <h1>Monsters Rolodex</h1>
             <SearchBox 
                placeholder="search monsters"
